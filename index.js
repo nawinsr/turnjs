@@ -110,6 +110,8 @@ window.addEventListener('load', function () {
     const params = Object.fromEntries(urlSearchParams.entries());
     
     const images = base64decode(params.test)
+    const name =params.name
+    document.getElementById('nameid').innerHTML=`Welcome ${name}`
     console.log(JSON.parse(images));
     const ImageArray = JSON.parse(images)
     for (let i = 0; i <4; i++) {
