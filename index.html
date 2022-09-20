@@ -418,12 +418,16 @@
     if (wh < ww) {
         height = wh - 50
         width = height * ar * 2
+        console.log(1,height,width);
+
         if (width > ww) {
             width = ww - 50
-            height = width * (1 / ar)
+            height = width * (1 / (ar*2))
+            console.log(2,height,width);
+
             while (height > wh) {
                 width -= 10
-                height = width * (1 / ar)
+                height = width * (1 / (2*ar))
 
             }
         }
