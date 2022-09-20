@@ -112,7 +112,7 @@ function setImage(id, url) {
 
 }
 function hideDiv(id) {
-        document.getElementById(id).remove()
+        // document.getElementById(id).remove()
 
 }
 // var xmlString = `       <div class="hard">
