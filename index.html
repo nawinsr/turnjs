@@ -282,18 +282,16 @@
     <style>
         body {
             overflow: hidden;
-            /* background: rgb(143,21,33);
-    background: radial-gradient(circle, rgba(143,21,33,1) 0%, rgba(251,25,47,1) 100%); */
-
         }
 
         #flipbook {
-            width: 400px;
-            height: 300px;
-
+            width: auto;
+            height: 98vh;
         }
 
         .centered {
+
+
             position: fixed !important;
             top: 50% !important;
             left: 50% !important;
@@ -301,8 +299,8 @@
         }
 
         #flipbook .page {
-            width: 400px;
-            height: 300px;
+            width: auto;
+            height: 98vh;
             background-color: white;
             line-height: 300px;
             font-size: 20px;
@@ -329,22 +327,29 @@
         }
 
         #flipbook .odd {
-            background: -webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
-            background-image: -webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-            background-image: -moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-            background-image: -ms-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-            background-image: -o-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-            background-image: linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+            background: -webkit-gradient(linear,
+                    right top,
+                    left top,
+                    color-stop(0.95, #fff),
+                    color-stop(1, #dadada));
+            background-image: -webkit-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+            background-image: -moz-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+            background-image: -ms-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+            background-image: -o-linear-gradient(right, #fff 95%, #c4c4c4 100%);
+            background-image: linear-gradient(right, #fff 95%, #c4c4c4 100%);
             -webkit-box-shadow: inset 0 0 5px #666;
             -moz-box-shadow: inset 0 0 5px #666;
             -o-box-shadow: inset 0 0 5px #666;
             -ms-box-shadow: inset 0 0 5px #666;
             box-shadow: inset 0 0 5px #666;
-
         }
 
         #flipbook .even {
-            background: -webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
+            background: -webkit-gradient(linear,
+                    left top,
+                    right top,
+                    color-stop(0.95, #fff),
+                    color-stop(1, #dadada));
             background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
             background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
             background-image: -ms-linear-gradient(left, #fff 95%, #dadada 100%);
@@ -355,18 +360,17 @@
             -o-box-shadow: inset 0 0 5px #666;
             -ms-box-shadow: inset 0 0 5px #666;
             box-shadow: inset 0 0 5px #666;
-        }
 
+        }
 
 
         img {
+            /* object-fit: cover; */
             max-height: 100%;
             max-width: 100%;
-            width: 700px;
-            height: 400px;
+            width: 100%;
+            height: 98vh;
         }
-
-        /* EOS */
     </style>
 </head>
 
@@ -392,22 +396,64 @@
         </div> -->
 
         <div class="hard">
-            A prototype by NAVEEN
+            Developed by NAVEEN
         </div>
     </div>
 
 </body>
 
 <script type="text/javascript" nonce="6cf83bab-3da8-494c-902f-08b7e49f3d8b">//<![CDATA[
+    const urlSearchParamss = new URLSearchParams(window.location.search);
+    const paramss = Object.fromEntries(urlSearchParamss.entries());
+
+    let ar = paramss.ar
+    let width
+    let height
+
+    const wh = $(window).height()
+    const ww = $(window).width()
+
+    console.log('wh', wh, 'ww', ww);
+
+    if (wh < ww) {
+        height = wh - 50
+        width = height * ar * 2
+        if (width > ww) {
+            width = ww - 50
+            height = width * (1 / ar)
+            while (height > wh) {
+                width -= 10
+                height = width * (1 / ar)
+
+            }
+        }
+        console.log('width', width, 'height', height);
+    }
+    if (wh > ww) {
+        width = ww - 50
+        height = width * (1 / ar)
+        if (height > wh) {
+            height = wh - 50
+            width = height * ar * 2
+        }
+        while (width > ww) {
+            height -= 10
+            width = height * ar * 2
+
+        }
+    }
+
     $("#flipbook").turn({
-        width: 500,
-        height: 300,
+        width: width,
+        height: height,
         autoCenter: true
     });
 
     $("#flipbook").bind("turning", function (event, page, view) {
 
     });
+
+
 
 
 //]]></script>

@@ -5,17 +5,7 @@ const base64abc = [
     "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "/"
 ];
-/*
-// This constant can also be computed with the following algorithm:
-const l = 256, base64codes = new Uint8Array(l);
-for (let i = 0; i < l; ++i) {
-    base64codes[i] = 255; // invalid character
-}
-base64abc.forEach((char, index) => {
-    base64codes[char.charCodeAt(0)] = index;
-});
-base64codes["=".charCodeAt(0)] = 0; // ignored anyway, so we just need to prevent an error
-*/
+
 const base64codes = [
     255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
     255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
@@ -93,25 +83,19 @@ function base64decode(str, decoder = new TextDecoder()) {
     return decoder.decode(base64ToBytes(str));
 }
 
-const a = [
-    { img: "https://drive.google.com/uc?id=1zDEupwO75x3KegIlMQLC4FonK_VHSkTx" },
-    { img: "https://drive.google.com/uc?id=1zDEupwO75x3KegIlMQLC4FonK_VHSkTx" },
-   
 
-]
 
-const s = JSON.stringify(a)
 
 
 
 window.addEventListener('load', function () {
-    console.log('e', base64encode(s));
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     
     const images = base64decode(params.test)
     const name =params.name
-    document.getElementById('nameid').innerHTML=`Welcome ${name}`
+    if(!name) name='user'
+    document.getElementById('nameid').innerHTML=`Welcome ${name} !`
     console.log(JSON.parse(images));
     const ImageArray = JSON.parse(images)
     for (let i = 0; i <4; i++) {
